@@ -193,11 +193,11 @@ class MyInterface:
         self.acceleration_input = ctk.CTkEntry(inputs_frame, width=345/2-5, placeholder_text="Acceleration (Degrees/s^2)")
         self.acceleration_input.grid(row=2, column=1, padx=5, pady=5)
 
-        self.min_angle_input = ctk.CTkEntry(inputs_frame, width=345/2-5, placeholder_text="Min Angle (Degrees)")
+        self.min_angle_input = ctk.CTkEntry(inputs_frame, width=345/2-5, placeholder_text="Dorsiflex Angle (Degrees)")
         self.min_angle_input.grid(row=3, column=0, padx=5, pady=5)
         self.min_angle_input.bind('<KeyRelease>', self.validate_angle_input)
 
-        self.max_angle_input = ctk.CTkEntry(inputs_frame, width=345/2-5, placeholder_text="Max Angle (Degrees)")
+        self.max_angle_input = ctk.CTkEntry(inputs_frame, width=345/2-5, placeholder_text="Plantarflex Angle (Degrees)")
         self.max_angle_input.grid(row=3, column=1, padx=5, pady=5)
         self.max_angle_input.bind('<KeyRelease>', self.validate_angle_input)
 
@@ -656,8 +656,8 @@ class MyInterface:
         self.cycles_input.configure(placeholder_text="Cycles")
         self.speed_input.configure(placeholder_text="Speed (Degrees/S)")
         self.acceleration_input.configure(placeholder_text="Acceleration (Degrees/s^2)")
-        self.min_angle_input.configure(placeholder_text="Min Angle (Degrees)")
-        self.max_angle_input.configure(placeholder_text="Max Angle (Degrees)")
+        self.min_angle_input.configure(placeholder_text="Dorsiflex Angle (Degrees)")
+        self.max_angle_input.configure(placeholder_text="Plantarflex Angle (Degrees)")
 
         self.file_name_input.configure(state= "normal")
         self.cycles_input.configure(state= "normal")
@@ -1499,7 +1499,7 @@ class MyInterface:
             self.cycles_input.configure(state="normal")
 
     def validate_angle_input(self, event=None):
-        """Validate and constrain angle inputs to 12 degrees"""
+        """Validate and constrain angle inputs to 20 degrees"""
         try:
             # Get the widget that triggered the event
             widget = event.widget
@@ -1508,14 +1508,14 @@ class MyInterface:
             value = widget.get()
             if value:  # Only validate if there's a value
                 angle = float(value)
-                if angle > 12:
+                if angle > 20:
                     widget.delete(0, 'end')
-                    widget.insert(0, "12")
-                    self.update_terminal("Angle cannot exceed 12 degrees\n")
-                elif angle < -12:
+                    widget.insert(0, "20")
+                    self.update_terminal("Angle cannot exceed 20 degrees\n")
+                elif angle < -20:
                     widget.delete(0, 'end')
-                    widget.insert(0, "-12")
-                    self.update_terminal("Angle cannot be less than -12 degrees\n")
+                    widget.insert(0, "-20")
+                    self.update_terminal("Angle cannot be less than -20 degrees\n")
         except ValueError:
             # If the input is not a valid number, clear it
             widget.delete(0, 'end')
